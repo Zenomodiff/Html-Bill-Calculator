@@ -47,14 +47,16 @@
 
 <div class="container">
     <div class="box">
-        <label for="bill1">1 Month Bill</label>
-        <input type="number" id="bill1" placeholder="Enter value" oninput="calculate('bill1', 'result1')">
-        <p>Result: <span id="result1">0</span></p>
+        <label for="commercial">Commercial Bill</label>
+        <input type="number" id="commercial" placeholder="Enter value" oninput="calculateCommercial()">
+        <p>Result: <span id="commercialResult">0</span></p>
+        <p>Sq Feet: <span id="commercialSqFeet">0</span></p>
     </div>
     <div class="box">
-        <label for="bill2">2 Month Bill</label>
-        <input type="number" id="bill2" placeholder="Enter value" oninput="calculate('bill2', 'result2')">
-        <p>Result: <span id="result2">0</span></p>
+        <label for="residential">Residential Bill</label>
+        <input type="number" id="residential" placeholder="Enter value" oninput="calculateResidential()">
+        <p>Result: <span id="residentialResult">0</span></p>
+        <p>Sq Feet: <span id="residentialSqFeet">0</span></p>
     </div>
 </div>
 
@@ -63,13 +65,33 @@
 </footer>
 
 <script>
-    function calculate(billId, resultId) {
-        let billValue = document.getElementById(billId).value;
-        if (billValue) {
-            let result = (billValue / 30) / 8.9 / 4;
-            document.getElementById(resultId).innerText = result.toFixed(2);
+    function calculateCommercial() {
+        let commercialBill = document.getElementById('commercial').value;
+        if (commercialBill) {
+            let result = (commercialBill / 30) / 8.9 / 4;
+            document.getElementById('commercialResult').innerText = result.toFixed(5);
+            
+            // Multiply by 70 for Sq Feet
+            let sqFeet = result * 70;
+            document.getElementById('commercialSqFeet').innerText = sqFeet.toFixed(5);
         } else {
-            document.getElementById(resultId).innerText = "0";
+            document.getElementById('commercialResult').innerText = "0.00000";
+            document.getElementById('commercialSqFeet').innerText = "0.00000";
+        }
+    }
+
+    function calculateResidential() {
+        let residentialBill = document.getElementById('residential').value;
+        if (residentialBill) {
+            let result = (residentialBill / 2 / 30) / 8.9 / 4;
+            document.getElementById('residentialResult').innerText = result.toFixed(5);
+            
+            // Multiply by 70 for Sq Feet
+            let sqFeet = result * 70;
+            document.getElementById('residentialSqFeet').innerText = sqFeet.toFixed(5);
+        } else {
+            document.getElementById('residentialResult').innerText = "0.00000";
+            document.getElementById('residentialSqFeet').innerText = "0.00000";
         }
     }
 </script>
